@@ -18,18 +18,35 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
+  final questions = const [
+    {
+      'questionText': 'Favorite color:',
+      'answers': ['Black', 'Red', 'Green', 'Blue']
+    },
+    {
+      'questionText': 'Favorite book:',
+      'answers': [
+        'Hobbit',
+        'Lord Of The Rings',
+        'Killing Species',
+        'Unfinished Tales'
+      ]
+    },
+    {
+      'questionText': 'Favorite animal:',
+      'answers': ['dog', 'cat', 'cheetah', 'elephant']
+    },
+  ];
+
   void _answerQuestions() {
+    if (_questionIndex < questions.length) {
+      print('We have more questions!');
+    }
     setState(() {
       _questionIndex++;
     });
     print(_questionIndex);
   }
-
-  var questions = [
-    'Favorite color:',
-    'Favorite book:',
-    'Favorite animal:',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +56,14 @@ class _MyAppState extends State<MyApp> {
           title: Text("My FirstApp"),
         ),
         body: Column(
-          children: <Widget>[
+          children: [
             Question(
-              questions[_questionIndex],
+              questions[_questionIndex]['questionText'],
             ),
-            Answer(),
-            Answer(),
-            Answer(),
-            Answer(),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestions, answer);
+            }).toList()
           ],
         ),
       ),
