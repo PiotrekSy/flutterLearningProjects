@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -24,14 +25,14 @@ class _MyAppState extends State<MyApp> {
     print(_questionIndex);
   }
 
+  var questions = [
+    'Favorite color:',
+    'Favorite book:',
+    'Favorite animal:',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'Ulubiona kasiazka!!!',
-      'Ulubione zwierzę!!!',
-      'Ulubiony kolor!!!',
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -42,18 +43,10 @@ class _MyAppState extends State<MyApp> {
             Question(
               questions[_questionIndex],
             ),
-            ElevatedButton(
-              child: Text("answer1"),
-              onPressed: _answerQuestions,
-            ),
-            ElevatedButton(
-              child: Text("answer2"),
-              onPressed: _answerQuestions,
-            ),
-            ElevatedButton(
-              child: Text("answer3"),
-              onPressed: _answerQuestions,
-            ),
+            Answer(),
+            Answer(),
+            Answer(),
+            Answer(),
           ],
         ),
       ),
