@@ -11,9 +11,25 @@ class MyApp extends StatefulWidget {
   }
 }
 
+//states :
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
   var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestions(int score) {
+    _totalScore += score;
+    setState(() {
+      _questionIndex++;
+    });
+    print(_questionIndex);
+  }
 
   final _questions = const [
     {
@@ -45,14 +61,6 @@ class _MyAppState extends State<MyApp> {
     },
   ];
 
-  void _answerQuestions(int score) {
-    _totalScore += score;
-    setState(() {
-      _questionIndex++;
-    });
-    print(_questionIndex);
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,7 +74,7 @@ class _MyAppState extends State<MyApp> {
                 questions: _questions,
                 questionIndex: _questionIndex,
               )
-            : Result(_totalScore),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
